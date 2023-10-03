@@ -1,0 +1,10 @@
+.main {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* @media screen and (max-width: 767px) {
+  .popup__container {
+    width: 282px;
+  }
+} */

@@ -1,0 +1,153 @@
+.techs {
+  padding-inline: 70px;
+  background-color: #272727;
+}
+
+.techs__title {
+  color: #fff;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0;
+  border-bottom: 1px solid #dadada;
+  padding: 100px 0 23px;
+}
+
+.techs__header {
+  margin: 90px 0 26px;
+  color: #fff;
+  text-align: center;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px; /* 116% */
+  letter-spacing: -2px;
+}
+
+.techs__text {
+  max-width: 460px;
+  display: flex;
+  margin: 0 auto;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px; /* 142.857% */
+  letter-spacing: -0.56px;
+}
+
+.techs__cards {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 100px 0;
+}
+
+.techs__cards :last-child {
+  margin: 0;
+}
+
+.techs__card {
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.56px;
+  width: 90px;
+  height: 60px;
+  border-radius: 10px;
+  background: #303030;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.4s;
+}
+
+.techs__card:hover {
+  color: #000;
+  background-color: var(--green);
+}
+
+.techs__card:nth-child(-n + 3):hover {
+  transform: translate(-4px, -4px);
+}
+.techs__card:nth-child(4n):hover {
+  transform: translate(0, -4px);
+}
+
+.techs__card:nth-child(n + 5):hover {
+  transform: translate(4px, -4px);
+}
+
+@media screen and (max-width: 1279px) {
+  .techs {
+    padding-inline: 50px;
+  }
+
+  .techs__header {
+    margin: 80px 0 22px;
+  }
+
+  .techs__text {
+    font-size: 12px;
+    line-height: 18px; /* 150% */
+    letter-spacing: -0.48px;
+  }
+
+  .techs__cards {
+    padding: 83px 0 90px;
+  }
+
+  .techs__card {
+    font-size: 12px;
+    letter-spacing: -0.48px;
+    width: 84px;
+    height: 57px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .techs {
+    padding-inline: 18px;
+  }
+
+  .techs__title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+    border-bottom: 1px solid #000;
+    padding: 70px 0 28px;
+  }
+
+  .techs__header {
+    margin: 60px 0 24px;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px; /* 145.455% */
+    letter-spacing: -0.44px;
+    max-width: 292px;
+  }
+
+  .techs__cards {
+    padding: 50px 0 70px;
+    display: grid;
+    grid-template-columns: repeat(2, 84px);
+    gap: 10px;
+  }
+
+  .techs__card {
+    margin: 0;
+  }
+}
