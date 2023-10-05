@@ -31,6 +31,7 @@ const MoviesCardList = ({ movies }) => {
       {showMore >= movies.length ? (
         <button
           onClick={handleShowDefault}
+          type="button"
           className={`card-list__button ${
             movies.length <= defaultMoviesToShow && 'card-list__button_hidden'
           }`}
@@ -38,7 +39,7 @@ const MoviesCardList = ({ movies }) => {
           Свернуть
         </button>
       ) : (
-        <button onClick={handleShowMore} className="card-list__button">
+        <button onClick={handleShowMore} type="button" className="card-list__button">
           Еще
         </button>
       )}

@@ -26,19 +26,19 @@ const Profile = () => {
 
   return (
     <>
-      <section className="profile">
+      <main className="profile">
         <div className="profile-block">
-          <h2 className="profile__header">Привет, Виталий!</h2>
+          <h1 className="profile__header">Привет, Виталий!</h1>
           <form className="profile__form">
             <ul className="profile__list">
               <li className="profile__element">
                 Имя
                 <input
-                  className={`profile__input ${errors.name && 'profile__input_invalid'}`}
-                  type="name"
-                  name="name"
-                  autoComplete="username"
-                  defaultValue={defaultName}
+                  className={`profile__input ${errors.name ? 'profile__input_invalid' : ''}`}
+                  type="text"
+                  name="username"
+                  autoComplete="off"
+                  placeholder={defaultName}
                   onChange={(e) => setName(e.target.value)}
                   {...register('name', {
                     required: 'Поле Имя должно быть заполнено',
@@ -61,11 +61,11 @@ const Profile = () => {
               <li className="profile__element">
                 E-mail
                 <input
-                  className={`profile__input ${errors.email && 'profile__input_invalid'}`}
+                  className={`profile__input ${errors.email ? 'profile__input_invalid' : ''}`}
                   type="email"
                   name="email"
                   autoComplete="email"
-                  defaultValue={defaultEmail}
+                  placeholder={defaultEmail}
                   onChange={(e) => setEmail(e.target.value)}
                   {...register('email', {
                     required: 'Поле E-mail должно быть заполнено',
@@ -86,10 +86,10 @@ const Profile = () => {
               </div>
               {!isEditing ? (
                 <>
-                  <button className="profile__edit-btn" onClick={handleEdit}>
+                  <button className="profile__edit-btn" type="button" onClick={handleEdit}>
                     Редактировать
                   </button>
-                  <Link to="/signin" className="profile__logout-btn">
+                  <Link to="/" className="profile__logout-btn">
                     Выйти из аккаунта
                   </Link>
                 </>
@@ -108,7 +108,7 @@ const Profile = () => {
             </div>
           </form>
         </div>
-      </section>
+      </main>
     </>
   );
 };

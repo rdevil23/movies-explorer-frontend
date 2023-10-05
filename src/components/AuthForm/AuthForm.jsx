@@ -7,20 +7,20 @@ import AuthButton from '../AuthButton/AuthButton';
 const AuthForm = ({ title, buttonText, children, isValid }) => {
   return (
     <>
-      <section className="auth">
+      <main className="auth">
         <div className="auth__block">
           <div className="auth__header-block">
-            <Link to="/">
-              <img src={logo} alt="Логотип" className="auth__logo" />
+            <Link to="/" className="auth__logo">
+              <img src={logo} alt="Логотип" />
             </Link>
           </div>
-          <h2 className="auth__header">{title}</h2>
+          <h1 className="auth__header">{title}</h1>
           <form className="auth__form">
             <div className="auth__inputs-block">{children}</div>
             <AuthButton buttonText={buttonText} isValid={isValid} />
           </form>
         </div>
-      </section>
+      </main>
     </>
   );
 };

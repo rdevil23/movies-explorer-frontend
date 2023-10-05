@@ -29,6 +29,11 @@
   border-bottom: 1px solid #424242;
 }
 
+.portfolio__link-block:last-of-type {
+  padding: 0;
+  border-bottom: none;
+}
+
 .portfolio__link {
   display: flex;
   align-items: center;
@@ -48,7 +53,7 @@
 
 @media screen and (max-width: 1279px) {
   .portfolio {
-    padding: 90px 50px 169px;
+    padding: 91px 50px 169px;
   }
 
   .portfolio__name {
@@ -61,13 +66,17 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .portfolio {
-    padding: 70px 14px 149px;
+    padding: 70px 14px 146px;
   }
 
   .portfolio__name {
     font-size: 14px;
+  }
+
+  .portfolio__links {
+    padding-top: 40px;
   }
 
   .portfolio__link {

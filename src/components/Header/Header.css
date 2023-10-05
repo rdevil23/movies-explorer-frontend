@@ -15,7 +15,7 @@
 }
 
 .header__logo:hover {
-  transform: rotate(360deg);
+  opacity: 0.8;
 }
 
 .header_authorized {
@@ -28,7 +28,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .header {
     padding-inline: 14px;
   }

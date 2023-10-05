@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
 import SearchForm from '../SearchForm/SearchForm';
-import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
@@ -40,11 +39,10 @@ const Movies = () => {
   }, []);
 
   return (
-    <section className="movies">
+    <main className="movies">
       <SearchForm />
-      <FilterCheckbox />
       {isActive ? <Preloader /> : <MoviesCardList movies={movies} />}
-    </section>
+    </main>
   );
 };
 

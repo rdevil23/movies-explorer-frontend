@@ -8,14 +8,14 @@ const AboutProject = () => {
       </h2>
       <div className="about__text-container">
         <div className="about__text-block">
-          <p className="about__text-header">Дипломный проект включал 5 этапов</p>
+          <h3 className="about__text-header">Дипломный проект включал 5 этапов</h3>
           <p className="about__text-paragraph">
             Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные
             доработки.
           </p>
         </div>
         <div className="about__text-block">
-          <p className="about__text-header">На выполнение диплома ушло 5 недель</p>
+          <h3 className="about__text-header">На выполнение диплома ушло 5 недель</h3>
           <p className="about__text-paragraph">
             У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы
             успешно защититься.
@@ -24,11 +24,11 @@ const AboutProject = () => {
       </div>
       <div className="about__graph-container">
         <div className="about__graph-block about__graph-block-left">
-          <div className="about__graph-header about__graph-header-left">1 неделя</div>
+          <p className="about__graph-header about__graph-header-left">1 неделя</p>
           <p className="about__graph-paragraph">Back-end</p>
         </div>
         <div className="about__graph-block about__graph-block-right">
-          <div className="about__graph-header about__graph-header-right">4 недели</div>
+          <p className="about__graph-header about__graph-header-right">4 недели</p>
           <p className="about__graph-paragraph">Front-end</p>
         </div>
       </div>

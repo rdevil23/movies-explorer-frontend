@@ -4,7 +4,7 @@ import './NotFound.css';
 function NotFound() {
   const navigate = useNavigate();
   return (
-    <section className="notfound">
+    <main className="notfound">
       <div className="notfound__block">
         <div className="notfound__main">
           <h1 className="notfound__header">404</h1>
@@ -20,7 +20,7 @@ function NotFound() {
           Назад
         </Link>
       </div>
-    </section>
+    </main>
   );
 }
 

@@ -17,6 +17,7 @@ const Login = () => {
         className={`auth__input ${errors.email && 'auth__input_invalid'}`}
         type="email"
         name="email"
+        inputName="E-mail"
         autoComplete="email"
         placeholder="Введите Email"
         register={{
@@ -35,6 +36,7 @@ const Login = () => {
         className={`auth__input ${errors.password && 'auth__input_invalid'}`}
         type="password"
         name="password"
+        inputName="Пароль"
         autoComplete="on"
         placeholder="Введите пароль"
         register={{
@@ -43,6 +45,10 @@ const Login = () => {
             minLength: {
               value: 8,
               message: 'Минимальная длина 8 символов',
+            },
+            maxLength: {
+              value: 30,
+              message: 'Максимальная длина 30 символов',
             },
           }),
         }}

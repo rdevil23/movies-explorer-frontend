@@ -85,6 +85,10 @@
     padding-inline: 50px;
   }
 
+  .aboutme__title {
+    padding: 90px 0 23px;
+  }
+
   .aboutme__name {
     font-size: 40px;
     line-height: 40px; /* 100% */
@@ -109,15 +113,22 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .aboutme {
     padding-inline: 14px;
+  }
+
+  .aboutme__title {
+    padding: 70px 0 28px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
   }
 
   .aboutme__block {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 60px;
   }
 
   .aboutme__name {

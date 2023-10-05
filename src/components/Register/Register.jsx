@@ -15,9 +15,10 @@ const Register = () => {
     <AuthForm title="Добро пожаловать!" buttonText="Зарегистрироваться" isValid={isValid}>
       <Input
         className={`auth__input ${errors.name && 'auth__input_invalid'}`}
-        type="name"
-        name="name"
-        autoComplete="username"
+        type="text"
+        name="username"
+        inputName="Имя"
+        autoComplete="off"
         placeholder="Введите имя"
         register={{
           ...register('name', {
@@ -42,6 +43,7 @@ const Register = () => {
         className={`auth__input ${errors.email && 'auth__input_invalid'}`}
         type="email"
         name="email"
+        inputName="E-mail"
         autoComplete="email"
         placeholder="Введите Email"
         register={{
@@ -60,7 +62,8 @@ const Register = () => {
         className={`auth__input ${errors.password && 'auth__input_invalid'}`}
         type="password"
         name="password"
-        autoComplete="on"
+        inputName="Пароль"
+        autoComplete="off"
         placeholder="Введите пароль"
         register={{
           ...register('password', {
@@ -68,6 +71,10 @@ const Register = () => {
             minLength: {
               value: 8,
               message: 'Минимальная длина 8 символов',
+            },
+            maxLength: {
+              value: 30,
+              message: 'Максимальная длина 30 символов',
             },
           }),
         }}

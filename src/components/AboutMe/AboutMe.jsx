@@ -8,7 +8,7 @@ const AboutMe = () => {
       <div className="aboutme__block">
         <div className="aboutme__text">
           <div className="aboutme__text-block">
-            <p className="aboutme__name">Виталий</p>
+            <h3 className="aboutme__name">Виталий</h3>
             <p className="aboutme__profession">Фронтенд-разработчик, 30 лет</p>
             <p className="aboutme__about">
               Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена и

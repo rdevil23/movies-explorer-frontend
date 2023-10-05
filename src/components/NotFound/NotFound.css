@@ -13,13 +13,13 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .notfound__main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 184px;
 }
 
 .notfound__header {
@@ -49,14 +49,18 @@
 @media screen and (max-width: 1279px) {
   .notfound {
     min-height: calc(100vh - 630px);
-    margin: 408px 0 222px;
+    margin: 408px 0 0;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .notfound {
     min-height: calc(100vh - 359px);
     margin: 329px 0 30px;
+  }
+
+  .notfound__main {
+    margin-bottom: 284px;
   }
 
   .notfound__header {

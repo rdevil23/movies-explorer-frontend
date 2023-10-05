@@ -2,18 +2,6 @@
   display: flex;
 }
 
-.blur {
-  top: 0;
-  right: -100%;
-  background-color: #000;
-  opacity: 0;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: none;
-}
-
 .navauth__list {
   display: flex;
   align-items: center;
@@ -21,10 +9,18 @@
   padding: 0;
   z-index: 2;
   transition: all 0.8s;
+  height: 32px;
+  margin-block: 21px;
 }
 
 .navauth__list :any-link {
   text-decoration: none;
+}
+
+.navauth__element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navauth__reg {
@@ -60,59 +56,19 @@
   opacity: 0.8;
 }
 
-@media screen and (max-width: 1279px) {
-  .sidebar__close-btn {
-    position: absolute;
-    top: 22px;
-    right: 22px;
-  }
-
+@media screen and (max-width: 768px) {
   .navauth__list {
-    background-color: var(--bg);
-    top: 0;
-    right: -200%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: fixed;
-    margin: 0;
-    height: 100%;
-    width: 520px;
-  }
-
-  .navauth__element:first-of-type {
-    margin: 0 0 28px 0;
+    height: 26px;
+    margin-block: 24px;
   }
 
   .navauth__reg {
-    margin: 0;
+    font-size: 10px;
+    margin-right: 14px;
   }
 
-  .sidebar {
-    right: 0;
-  }
-
-  .blur_active {
-    right: 0;
-    opacity: 0.3;
-  }
-
-  .sidebar__btn {
-    display: block;
-    visibility: visible;
-    opacity: 1;
-  }
-}
-
-@media screen and (max-width: 767px) {
-  .sidebar__close-btn {
-    top: 14px;
-    right: 14px;
-  }
-  .sidebar {
-    width: 100%;
-  }
-  .blur_active {
-    display: none;
+  .navauth__auth {
+    width: 54px;
+    height: 26px;
   }
 }

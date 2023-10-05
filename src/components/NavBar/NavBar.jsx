@@ -18,12 +18,6 @@ function NavBar() {
     <>
       <nav className="navbar">
         <ul className={`navbar__list ${isBlurActive ? 'sidebar' : ''}`}>
-          <img
-            src={closeIco}
-            alt="Кнопка закрытия меню"
-            onClick={sidebarHandle}
-            className="sidebar__btn sidebar__close-btn"
-          />
           <li
             className={`navbar__element ${
               location.pathname === '/' ? 'navbar__element_active' : ''
@@ -51,16 +45,24 @@ function NavBar() {
               Сохранённые фильмы
             </NavLink>
           </li>
-          <div className="navbar__profile">
-            <NavLink to="/profile" className="navbar__link">
-              <p className="navbar__text">Аккаунт</p>
-              <img src={profileIco} alt="Иконка профиля" className="navbar__profile-ico" />
-            </NavLink>
-          </div>
         </ul>
+        <div className={`navbar__profile ${isBlurActive ? 'navbar__profile_active' : ''}`}>
+          <NavLink to="/profile" onClick={sidebarHandle} className="navbar__link">
+            <p className="navbar__text">Аккаунт</p>
+            <div className="navbar__profile-ico">
+              <img src={profileIco} alt="Иконка профиля" />
+            </div>
+          </NavLink>
+        </div>
         <div className={`blur ${isBlurActive ? 'blur_active' : ''}`}></div>
       </nav>
-      <img src={burgerIco} alt="Кнопка меню" onClick={sidebarHandle} className="sidebar__btn" />
+      <img
+        src={closeIco}
+        alt="Кнопка закрытия меню"
+        onClick={sidebarHandle}
+        className={`sidebar-close-btn ${isBlurActive ? 'sidebar-close-btn_active' : ''}`}
+      />
+      <img src={burgerIco} alt="Кнопка меню" onClick={sidebarHandle} className="sidebar-btn" />
     </>
   );
 }

@@ -14,6 +14,10 @@
   background-color: #ebebeb;
 }
 
+.checkbox__tumb:hover {
+  opacity: 0.8;
+}
+
 .checkbox__dot {
   margin-block: 5px;
   margin-left: 6px;
@@ -42,8 +46,14 @@
   line-height: 18px; /* 138.462% */
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   .checkbox {
-    margin-inline: 4px;
+    margin-top: 30px;
+    padding-bottom: 64px;
+  }
+
+  .checkbox__tumb-text {
+    margin-left: 13px;
+    font-size: 11px;
   }
 }
