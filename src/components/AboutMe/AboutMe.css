@@ -1,0 +1,162 @@
+.aboutme {
+  padding-inline: 70px;
+}
+
+.aboutme__title {
+  color: #fff;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.88px;
+  margin: 0;
+  border-bottom: solid #dadada 1px;
+  padding: 110px 0 23px;
+}
+
+.aboutme__block {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 66px;
+}
+
+.aboutme__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.aboutme__text-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.aboutme__name {
+  color: #fff;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px; /* 116% */
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+.aboutme__profession {
+  color: #fff;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px; /* 111.111% */
+  margin: 18px 0 26px;
+}
+
+.aboutme__about {
+  max-width: 600px;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 157.143% */
+  margin: 0;
+}
+
+.aboutme__link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.aboutme__link:hover {
+  opacity: 0.7;
+}
+
+.aboutme__photo {
+  width: 270px;
+  height: 327px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 1279px) {
+  .aboutme {
+    padding-inline: 50px;
+  }
+
+  .aboutme__title {
+    padding: 90px 0 23px;
+  }
+
+  .aboutme__name {
+    font-size: 40px;
+    line-height: 40px; /* 100% */
+    letter-spacing: -1.6px;
+  }
+
+  .aboutme__profession {
+    margin: 16px 0 20px;
+    font-size: 12px;
+    line-height: 18px; /* 150% */
+  }
+
+  .aboutme__about {
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 18px; /* 150% */
+  }
+
+  .aboutme__photo {
+    width: 255px;
+    height: 307px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .aboutme {
+    padding-inline: 14px;
+  }
+
+  .aboutme__title {
+    padding: 70px 0 28px;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .aboutme__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+  }
+
+  .aboutme__name {
+    font-size: 30px;
+    line-height: normal;
+    letter-spacing: -1.2px;
+  }
+
+  .aboutme__profession {
+    margin-block: 20px;
+    font-size: 11px;
+    line-height: 16px; /* 145.455% */
+  }
+
+  .aboutme__about {
+    max-width: 292px;
+    font-size: 11px;
+    line-height: 16px; /* 145.455% */
+  }
+
+  .aboutme__photo {
+    order: -1;
+    width: 292px;
+    height: 352px;
+    margin-bottom: 40px;
+  }
+
+  .aboutme__link {
+    margin-top: 40px;
+  }
+}

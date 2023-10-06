@@ -1,0 +1,74 @@
+.navauth {
+  display: flex;
+}
+
+.navauth__list {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  z-index: 2;
+  transition: all 0.8s;
+  height: 32px;
+  margin-block: 21px;
+}
+
+.navauth__list :any-link {
+  text-decoration: none;
+}
+
+.navauth__element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navauth__reg {
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  margin-right: 30px;
+}
+
+.navauth__reg:hover {
+  opacity: 0.7;
+}
+
+.navauth__auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 76px;
+  height: 32px;
+  border-radius: 3px;
+  background: var(--green);
+  color: #000;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.navauth__auth:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .navauth__list {
+    height: 26px;
+    margin-block: 24px;
+  }
+
+  .navauth__reg {
+    font-size: 10px;
+    margin-right: 14px;
+  }
+
+  .navauth__auth {
+    width: 54px;
+    height: 26px;
+  }
+}
