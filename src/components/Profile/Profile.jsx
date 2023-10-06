@@ -27,7 +27,7 @@ const Profile = () => {
   return (
     <>
       <main className="profile">
-        <div className="profile-block">
+        <section className="profile-block">
           <h1 className="profile__header">Привет, Виталий!</h1>
           <form className="profile__form">
             <ul className="profile__list">
@@ -107,7 +107,7 @@ const Profile = () => {
               )}
             </div>
           </form>
-        </div>
+        </section>
       </main>
     </>
   );
