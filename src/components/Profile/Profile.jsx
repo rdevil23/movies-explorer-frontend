@@ -2,34 +2,42 @@ import { useForm } from 'react-hook-form';
 
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 
-const Profile = () => {
+const Profile = ({ onUpdateUser, onLogOut }) => {
+  const currentUser = useContext(CurrentUserContext);
+
+  const [username, setUsername] = useState(`${currentUser.name}`);
+  const [email, setEmail] = useState(`${currentUser.email}`);
+
   const [isEditing, setEditing] = useState(false);
-  const [defaultName, setName] = useState('Виталий');
-  const [defaultEmail, setEmail] = useState('pochta@yandex.ru');
+
   const handleEdit = (e) => {
     e.preventDefault();
     setEditing(true);
   };
+
   const {
     register,
+    handleSubmit,
     formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
   });
 
-  function handleSave(e) {
-    e.preventDefault();
-    setEditing(false);
+  function onSubmit() {
+    username === currentUser.name && email === currentUser.email
+      ? setEditing(false)
+      : onUpdateUser({ username, email });
   }
 
   return (
     <>
       <main className="profile">
-        <section className="profile-block">
-          <h1 className="profile__header">Привет, Виталий!</h1>
-          <form className="profile__form">
+        <section className="profile__block">
+          <h1 className="profile__header">{`Привет, ${currentUser.name}!`}</h1>
+          <form className="profile__form" onSubmit={handleSubmit(onSubmit)}>
             <ul className="profile__list">
               <li className="profile__element">
                 Имя
@@ -38,9 +46,12 @@ const Profile = () => {
                   type="text"
                   name="username"
                   autoComplete="off"
-                  placeholder={defaultName}
-                  onChange={(e) => setName(e.target.value)}
+                  value={username}
+                  placeholder="Введите имя"
                   {...register('name', {
+                    onChange: (e) => {
+                      setUsername(e.target.value);
+                    },
                     required: 'Поле Имя должно быть заполнено',
                     pattern: {
                       value: /^[A-Za-zА-Яа-яЁё /s -]/,
@@ -65,9 +76,12 @@ const Profile = () => {
                   type="email"
                   name="email"
                   autoComplete="email"
-                  placeholder={defaultEmail}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  placeholder="Введите почту"
                   {...register('email', {
+                    onChange: (e) => {
+                      setEmail(e.target.value);
+                    },
                     required: 'Поле E-mail должно быть заполнено',
                     pattern: {
                       value:
@@ -89,7 +103,7 @@ const Profile = () => {
                   <button className="profile__edit-btn" type="button" onClick={handleEdit}>
                     Редактировать
                   </button>
-                  <Link to="/" className="profile__logout-btn">
+                  <Link to="/" className="profile__logout-btn" onClick={onLogOut}>
                     Выйти из аккаунта
                   </Link>
                 </>
@@ -99,7 +113,6 @@ const Profile = () => {
                     className={`profile__save-btn ${!isValid && 'profile__save-btn_disabled'}`}
                     disabled={!isValid}
                     type="submit"
-                    onClick={handleSave}
                   >
                     Сохранить
                   </button>

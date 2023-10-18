@@ -1,21 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './AuthButton.css';
 
 const AuthButton = ({ buttonText, isValid }) => {
-  const navigate = useNavigate();
-  function handleLogin(e) {
-    e.preventDefault();
-    buttonText === 'Войти' ? navigate('/movies') : navigate('/signin');
-  }
-
   return (
     <div className="auth-btns-block">
       <button
-        className={`auth__button ${!isValid && 'auth__button_disabled'}`}
+        className={`auth__button ${!isValid ? 'auth__button_disabled' : ''}`}
         type="submit"
         disabled={!isValid}
-        onClick={handleLogin}
       >
         {buttonText}
       </button>

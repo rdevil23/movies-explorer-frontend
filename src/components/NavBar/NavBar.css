@@ -79,6 +79,10 @@
   justify-content: center;
 }
 
+.navbar__profile-ico_on-main {
+  background-color: #0f4157;
+}
+
 .sidebar-btn {
   cursor: pointer;
   display: none;

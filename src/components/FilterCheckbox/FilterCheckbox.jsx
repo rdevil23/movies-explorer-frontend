@@ -1,23 +1,22 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import './FilterCheckbox.css';
 
-const FilterCheckbox = () => {
-  const [isActive, setActive] = useState(false);
-
-  const handleClick = () => {
-    setActive(!isActive);
-  };
-
+const FilterCheckbox = ({ className, type, name, placeholder, checked, register }) => {
   return (
-    <div className="checkbox">
-      <div
-        className={`checkbox__tumb ${isActive ? 'checkbox__tumb_active' : ''}`}
-        onClick={handleClick}
-      >
-        <div className={`checkbox__dot ${isActive ? 'checkbox__dot_active' : ''}`}></div>
-      </div>
+    <section className="checkbox">
+      <label className="checkbox__tumb">
+        <input
+          className={className}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          checked={checked}
+          {...register}
+        />
+        <span className="checkbox__slider"></span>
+      </label>
       <p className="checkbox__tumb-text">Короткометражки</p>
-    </div>
+    </section>
   );
 };
 

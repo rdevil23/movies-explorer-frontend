@@ -49,7 +49,11 @@ function NavBar() {
         <div className={`navbar__profile ${isBlurActive ? 'navbar__profile_active' : ''}`}>
           <NavLink to="/profile" onClick={sidebarHandle} className="navbar__link">
             <p className="navbar__text">Аккаунт</p>
-            <div className="navbar__profile-ico">
+            <div
+              className={`navbar__profile-ico ${
+                location.pathname === '/' ? 'navbar__profile-ico_on-main' : ''
+              }`}
+            >
               <img src={profileIco} alt="Иконка профиля" />
             </div>
           </NavLink>

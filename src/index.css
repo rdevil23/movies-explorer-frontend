@@ -4,6 +4,7 @@
   --green: #3ddc84;
   --button: #4285f4;
   --saved: #ee3465;
+  --toastify-color-progress-dark: var(--green);
 }
 
 #root {

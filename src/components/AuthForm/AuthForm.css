@@ -1,16 +1,19 @@
 .auth {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
   min-height: 100vh;
 }
 
 .auth__block {
+  max-width: 396px;
+  width: 100%;
+  height: 100%;
   display: flex;
+  padding-top: calc(50vh - 253px);
+  margin: 0 auto;
   flex-direction: column;
-  width: 396px;
-  height: 560px;
+}
+
+.auth__header-block {
+  width: 100%;
 }
 
 .auth__logo {
@@ -38,38 +41,26 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: calc(100vh - 287px);
   width: 100%;
 }
 
 .auth__inputs-block {
   width: 396px;
+  margin-bottom: 134px;
 }
 
 @media screen and (max-width: 1279px) {
-  .auth {
-    width: 396px;
+  .auth__title {
+    display: flex;
+    margin: 60px 0 50px;
+    padding: 0;
   }
-}
-
-.auth__header-block {
-  width: 100%;
-}
-
-.auth__title {
-  display: flex;
-  margin: 60px 0 50px;
-  padding: 0;
 }
 
 @media screen and (max-width: 768px) {
-  .auth {
-    width: 260px;
-  }
-
   .auth__block {
+    max-width: 260px;
     margin: 56px auto 30px;
-    height: calc(100vh - 86px);
   }
 
   .auth__inputs-block {
