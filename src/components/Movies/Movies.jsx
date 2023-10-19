@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import SearchForm from '../SearchForm/SearchForm';
@@ -30,7 +30,7 @@ function Movies({ savedMovies, onSaveMovie }) {
   }
 
   const [searchResult, setSearchResult] = useLocalStorage('searchResult', []);
-  const [requestResult, setRequestResult] = useState([]);
+  const [requestResult, setRequestResult] = useLocalStorage('requestResult', []);
   const [isPreloaderActive, setPreloaderActive] = useState(false);
 
   const filter = (searchValue, movies, isShowShort) => {
@@ -38,12 +38,21 @@ function Movies({ savedMovies, onSaveMovie }) {
     setSearchResult(
       movies.filter((movie) => {
         const film =
-          searchValue && movie && movie.nameRU && movie.nameRU.toLowerCase().includes(searchValue);
-        const shortFilm = movie.duration < 40;
+          searchValue &&
+          movie &&
+          movie.nameRU &&
+          movie.nameRU.toLowerCase().includes(searchValue.toLowerCase());
+        const shortFilm = movie.duration <= 40;
         return isShowShort ? film && shortFilm : film;
       })
     );
   };
+
+  useEffect(() => {
+    isShowShort
+      ? filter(searchValue, requestResult, true)
+      : filter(searchValue, requestResult, false);
+  }, [isShowShort]);
 
   function handleSearch({ searchValue, isShowShort }) {
     if (requestResult.length === 0) {

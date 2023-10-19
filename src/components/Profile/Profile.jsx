@@ -2,14 +2,15 @@ import { useForm } from 'react-hook-form';
 
 import './Profile.css';
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 
 const Profile = ({ onUpdateUser, onLogOut }) => {
   const currentUser = useContext(CurrentUserContext);
 
-  const [username, setUsername] = useState(`${currentUser.name}`);
-  const [email, setEmail] = useState(`${currentUser.email}`);
+  const [username, setUsername] = useState(currentUser.name);
+  const [email, setEmail] = useState(currentUser.email);
+  const [submittedData, setSubmittedData] = useState({});
 
   const [isEditing, setEditing] = useState(false);
 
@@ -21,15 +22,24 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    reset,
+    formState,
+    formState: { errors, isValid, isDirty },
   } = useForm({
     mode: 'onChange',
+    defaultValues: { username: currentUser.name, email: currentUser.email },
   });
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({ username: '', email: '' });
+    }
+  }, [formState, submittedData, reset]);
+
   function onSubmit() {
-    username === currentUser.name && email === currentUser.email
-      ? setEditing(false)
-      : onUpdateUser({ username, email });
+    setSubmittedData({ username, email });
+    onUpdateUser({ username, email });
+    setEditing(false);
   }
 
   return (
@@ -37,7 +47,7 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
       <main className="profile">
         <section className="profile__block">
           <h1 className="profile__header">{`Привет, ${currentUser.name}!`}</h1>
-          <form className="profile__form" onSubmit={handleSubmit(onSubmit)}>
+          <form className="profile__form" onSubmit={handleSubmit(onSubmit)} noValidate>
             <ul className="profile__list">
               <li className="profile__element">
                 Имя
@@ -48,7 +58,7 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
                   autoComplete="off"
                   value={username}
                   placeholder="Введите имя"
-                  {...register('name', {
+                  {...register('username', {
                     onChange: (e) => {
                       setUsername(e.target.value);
                     },
@@ -95,7 +105,7 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
             </ul>
             <div className="profile__btns-block">
               <div className="profile__error-block">
-                {errors.name && <div className="profile__error">{errors.name.message}</div>}
+                {errors.username && <div className="profile__error">{errors.username.message}</div>}
                 {errors.email && <div className="profile__error">{errors.email.message}</div>}
               </div>
               {!isEditing ? (
@@ -110,8 +120,10 @@ const Profile = ({ onUpdateUser, onLogOut }) => {
               ) : (
                 <>
                   <button
-                    className={`profile__save-btn ${!isValid && 'profile__save-btn_disabled'}`}
-                    disabled={!isValid}
+                    className={`profile__save-btn ${
+                      !isDirty || !isValid ? 'profile__save-btn_disabled' : ''
+                    }`}
+                    disabled={!isDirty || !isValid}
                     type="submit"
                   >
                     Сохранить

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Input from '../Input/Input';
@@ -8,16 +8,27 @@ const Register = ({ onRegister }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [submittedData, setSubmittedData] = useState({});
 
   const {
     register,
     handleSubmit,
+    reset,
+    formState,
     formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
+    defaultValues: { username, email, password },
   });
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({ username: '', email: '', password: '' });
+    }
+  }, [formState, submittedData, reset]);
+
   function onSubmit() {
+    setSubmittedData({ username, email, password });
     onRegister({ email, password, username });
   }
 

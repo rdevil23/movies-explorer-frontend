@@ -5,6 +5,17 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import Preloader from '../Preloader/Preloader';
 
+import {
+  DESKTOP_DISPLAY,
+  TABLET_DISPLAY,
+  DESKTOP_CARDS,
+  TABLET_CARDS,
+  MOBILE_CARDS,
+  DESKTOP_MORE,
+  TABLET_MORE,
+  MOBILE_MORE,
+} from '../../utils/cardsConstants';
+
 const MoviesCardList = ({
   isPreloaderActive,
   movies,
@@ -17,12 +28,12 @@ const MoviesCardList = ({
   const location = useLocation();
 
   const defaultMoviesToShow = () => {
-    if (window.innerWidth > 1279) {
-      return 12;
-    } else if (768 <= window.innerWidth && window.innerWidth <= 1279) {
-      return 8;
+    if (window.innerWidth > DESKTOP_DISPLAY) {
+      return DESKTOP_CARDS;
+    } else if (TABLET_DISPLAY <= window.innerWidth && window.innerWidth <= DESKTOP_DISPLAY) {
+      return TABLET_CARDS;
     } else {
-      return 5;
+      return MOBILE_CARDS;
     }
   };
   const [showMore, setShowMore] = useState(defaultMoviesToShow);
@@ -30,12 +41,12 @@ const MoviesCardList = ({
 
   const handleShowMore = () => {
     setShowMore(defaultMoviesToShow);
-    if (window.innerWidth > 1279) {
-      setShowMore(showMore + 3);
-    } else if (768 <= window.innerWidth && window.innerWidth <= 1279) {
-      setShowMore(showMore + 2);
+    if (window.innerWidth > DESKTOP_DISPLAY) {
+      setShowMore(showMore + DESKTOP_MORE);
+    } else if (TABLET_DISPLAY <= window.innerWidth && window.innerWidth <= DESKTOP_DISPLAY) {
+      setShowMore(showMore + TABLET_MORE);
     } else {
-      setShowMore(showMore + 1);
+      setShowMore(showMore + MOBILE_MORE);
     }
   };
 

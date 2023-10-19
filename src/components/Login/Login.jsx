@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Input from '../Input/Input';
@@ -7,16 +7,26 @@ import AuthForm from '../AuthForm/AuthForm';
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [submittedData, setSubmittedData] = useState({});
 
   const {
     register,
     handleSubmit,
+    reset,
+    formState,
     formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
   });
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({ email: '', password: '' });
+    }
+  }, [formState, submittedData, reset]);
+
   const onSubmit = () => {
+    setSubmittedData({ email, password });
     onLogin({ email, password });
   };
 

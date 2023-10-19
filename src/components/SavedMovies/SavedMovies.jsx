@@ -13,7 +13,6 @@ function SavedMovies({ savedMovies, onRemoveMovie }) {
   const [searchSaved, setSearchSaved] = useLocalStorage('searchSaved', '');
   const [isShortSaved, setShortSaved] = useLocalStorage('isShortSaved', false);
   const [welcome, setWelcome] = useState(true);
-
   const [searchResult, setSearchResult] = useState(savedMovies);
 
   const {
@@ -33,25 +32,30 @@ function SavedMovies({ savedMovies, onRemoveMovie }) {
     setSearchResult(
       movies.filter((movie) => {
         const film =
-          searchSaved && movie && movie.nameRU && movie.nameRU.toLowerCase().includes(searchSaved);
-        const shortFilm = movie.duration < 40;
+          searchSaved &&
+          movie &&
+          movie.nameRU &&
+          movie.nameRU.toLowerCase().includes(searchSaved.toLowerCase());
+        const shortFilm = movie.duration <= 40;
         return isShortSaved ? film && shortFilm : film;
       })
     );
   };
 
+  useEffect(() => {
+    isShortSaved ? filter(searchSaved, true, savedMovies) : filter(searchSaved, false, savedMovies);
+  }, [isShortSaved]);
+
+  useEffect(() => {
+    setSearchSaved('');
+    setShortSaved(false);
+    setSearchResult(savedMovies);
+  }, [setSearchSaved, setShortSaved, savedMovies]);
+
   function handleSearch({ searchSaved, isShortSaved }) {
     setWelcome(false);
     filter(searchSaved, isShortSaved, savedMovies);
   }
-
-  useEffect(() => {
-    if (savedMovies.length === 0) {
-      setSearchSaved('');
-      setShortSaved(false);
-    }
-    setSearchResult(savedMovies);
-  }, [setSearchSaved, setShortSaved, savedMovies]);
 
   return (
     <main className="movies">

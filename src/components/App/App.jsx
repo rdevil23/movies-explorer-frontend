@@ -17,6 +17,18 @@ import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Preloader from '../Preloader/Preloader';
+import {
+  LOAD_DATA_ERROR,
+  SAVE_MOVIE_SUCCESS,
+  SAVE_MOVIE_ERROR,
+  REMOVE_MOVIE_SUCCESS,
+  REMOVE_MOVIE_ERROR,
+  SIGNUP_SUCCESS,
+  SIGNIN_SUCCESS,
+  AUTH_ERROR,
+  UPDATE_PROFILE_SUCCESS,
+  UPDATE_PROFILE_ERROR,
+} from '../../utils/messageConstants';
 
 function App() {
   const navigate = useNavigate();
@@ -37,7 +49,7 @@ function App() {
         })
         .catch((err) => {
           console.error(err);
-          toast('Ошибка при загрузке начальных данных');
+          toast(LOAD_DATA_ERROR);
           setCheckToken(false);
         });
     } else {
@@ -53,11 +65,11 @@ function App() {
         localStorage.setItem('jwt', res.token);
         setLoggedIn(true);
         navigate('/movies');
-        toast('Вы успешно авторизовались!');
+        toast(SIGNIN_SUCCESS);
       })
       .catch((err) => {
         console.error(err);
-        toast('Что-то пошло не так! Попробуйте еще раз.');
+        toast(AUTH_ERROR);
       });
   }
 
@@ -69,11 +81,11 @@ function App() {
           setLoggedIn(false);
           handleLogin({ email, password });
         }
-        toast('Регистрация прошла успешно!');
+        toast(SIGNUP_SUCCESS);
       })
       .catch((err) => {
         console.error(err);
-        toast('Что-то пошло не так! Попробуйте еще раз.');
+        toast(AUTH_ERROR);
       });
   }
 
@@ -88,9 +100,12 @@ function App() {
       .updateUserInfo(user, localStorage.jwt)
       .then((userData) => {
         setCurrentUser(userData);
-        toast('Данные успешно обновлены!');
+        toast(UPDATE_PROFILE_SUCCESS);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        toast(UPDATE_PROFILE_ERROR);
+      });
   }
 
   function handleRemoveMovie(delMovieId) {
@@ -102,9 +117,12 @@ function App() {
             return movie._id !== delMovieId;
           })
         );
-        toast('Фильм успешно удален');
+        toast(REMOVE_MOVIE_SUCCESS);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        toast(REMOVE_MOVIE_ERROR);
+      });
   }
 
   function handleSaveMovie(movie) {
@@ -119,9 +137,12 @@ function App() {
         .addMovieToSaved(movie, localStorage.jwt)
         .then((savedMovie) => {
           setSavedMovies([savedMovie, ...savedMovies]);
-          toast('Фильм сохранен!');
+          toast(SAVE_MOVIE_SUCCESS);
         })
-        .catch(console.error);
+        .catch((err) => {
+          console.error(err);
+          toast(SAVE_MOVIE_ERROR);
+        });
     }
   }
 

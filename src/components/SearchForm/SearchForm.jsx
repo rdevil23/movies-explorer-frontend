@@ -1,7 +1,7 @@
 import SearchButton from './SearchButton/SearchButton';
 import './SearchForm.css';
 
-const SearchForm = ({ onSubmit, isValid, isShortSaved, children, error }) => {
+const SearchForm = ({ onSubmit, isValid, children, error }) => {
   return (
     <>
       <form noValidate className="search" onSubmit={onSubmit} error={error}>
