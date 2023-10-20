@@ -1,49 +1,128 @@
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
 
 import './Movies.css';
+import movieApi from '../../utils/MoviesApi';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
+import SearchInput from '../SearchForm/SearchInput/SearchInput';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-const Movies = () => {
-  const filmName = 'В погоне за Бенкси';
-  const duration = 42;
+function Movies({ savedMovies, onSaveMovie }) {
+  const [searchValue, setSearchValue] = useLocalStorage('searchValue', '');
+  const [isShowShort, setShowShort] = useLocalStorage('isShowShort', false);
+  const [requestError, setRequestError] = useState(false);
+  const [welcome, setWelcome] = useState(true);
 
-  const movies = [
-    { id: 1, name: filmName, duration: duration, img: require('../../images/movies/movie1.jpg') },
-    { id: 2, name: filmName, duration: duration, img: require('../../images/movies/movie2.jpg') },
-    { id: 3, name: filmName, duration: duration, img: require('../../images/movies/movie3.jpg') },
-    { id: 4, name: filmName, duration: duration, img: require('../../images/movies/movie4.jpg') },
-    { id: 5, name: filmName, duration: duration, img: require('../../images/movies/movie5.jpg') },
-    { id: 6, name: filmName, duration: duration, img: require('../../images/movies/movie6.jpg') },
-    { id: 7, name: filmName, duration: duration, img: require('../../images/movies/movie7.jpg') },
-    { id: 8, name: filmName, duration: duration, img: require('../../images/movies/movie8.jpg') },
-    { id: 9, name: filmName, duration: duration, img: require('../../images/movies/movie9.jpg') },
-    { id: 10, name: filmName, duration: duration, img: require('../../images/movies/movie10.jpg') },
-    { id: 11, name: filmName, duration: duration, img: require('../../images/movies/movie11.jpg') },
-    { id: 12, name: filmName, duration: duration, img: require('../../images/movies/movie12.jpg') },
-    { id: 13, name: filmName, duration: duration, img: require('../../images/movies/movie13.jpg') },
-    { id: 14, name: filmName, duration: duration, img: require('../../images/movies/movie14.jpg') },
-    { id: 15, name: filmName, duration: duration, img: require('../../images/movies/movie15.jpg') },
-    { id: 16, name: filmName, duration: duration, img: require('../../images/movies/movie16.jpg') },
-    { id: 17, name: filmName, duration: duration, img: require('../../images/movies/movie17.jpg') },
-  ];
+  const {
+    register,
+    handleSubmit,
+    checked,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: 'onChange',
+  });
 
-  const [isActive, setActive] = useState(true);
+  function onSubmit() {
+    handleSearch({ searchValue, isShowShort });
+  }
+
+  const [searchResult, setSearchResult] = useLocalStorage('searchResult', []);
+  const [requestResult, setRequestResult] = useLocalStorage('requestResult', []);
+  const [isPreloaderActive, setPreloaderActive] = useState(false);
+
+  const filter = (searchValue, movies, isShowShort) => {
+    localStorage.setItem('requestResult', JSON.stringify(movies));
+    setSearchResult(
+      movies.filter((movie) => {
+        const film =
+          searchValue &&
+          movie &&
+          movie.nameRU &&
+          movie.nameRU.toLowerCase().includes(searchValue.toLowerCase());
+        const shortFilm = movie.duration <= 40;
+        return isShowShort ? film && shortFilm : film;
+      })
+    );
+  };
 
   useEffect(() => {
-    setTimeout(() => {
-      setActive(false);
-    }, 1000);
-  }, []);
+    isShowShort
+      ? filter(searchValue, requestResult, true)
+      : filter(searchValue, requestResult, false);
+  }, [isShowShort]);
+
+  function handleSearch({ searchValue, isShowShort }) {
+    if (requestResult.length === 0) {
+      setPreloaderActive(true);
+      movieApi
+        .getMovies()
+        .then((movies) => {
+          setRequestError(false);
+          setRequestResult(movies);
+          setWelcome(false);
+          filter(searchValue, movies, isShowShort);
+        })
+        .catch((err) => {
+          console.log(err);
+          setRequestError(true);
+        })
+        .finally(() => setPreloaderActive(false));
+    } else {
+      filter(searchValue, requestResult, isShowShort);
+    }
+  }
 
   return (
     <main className="movies">
-      <SearchForm />
-      {isActive ? <Preloader /> : <MoviesCardList movies={movies} />}
+      <SearchForm onSubmit={handleSubmit(onSubmit)} isValid={isValid} checked={checked}>
+        <SearchInput
+          className={`search__input  ${errors.searchValue ? 'search__input_invalid' : ''}`}
+          type="text"
+          name="searchValue"
+          placeholder="Фильм"
+          value={searchValue || ''}
+          register={{
+            ...register('searchValue', {
+              onChange: (e) => {
+                setSearchValue(e.target.value);
+              },
+              required: 'Поле должно быть заполнено',
+              maxLength: {
+                value: 30,
+                message: 'Максимальная длина 30 символов',
+              },
+            }),
+          }}
+          error={errors.searchValue}
+        />
+        <FilterCheckbox
+          className="checkbox__input"
+          type="checkbox"
+          name="checkbox"
+          checked={isShowShort || false}
+          register={{
+            ...register('checkbox', {
+              onChange: (e) => {
+                setShowShort(e.target.checked);
+              },
+            }),
+          }}
+        />
+      </SearchForm>
+
+      <MoviesCardList
+        movies={searchResult}
+        isPreloaderActive={isPreloaderActive}
+        savedMovies={savedMovies}
+        onSaveMovie={onSaveMovie}
+        requestError={requestError}
+        welcome={welcome}
+      />
     </main>
   );
-};
+}
 
 export default Movies;

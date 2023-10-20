@@ -1,0 +1,41 @@
+.search__button {
+  cursor: pointer;
+  margin: 10px 10px 10px 0;
+  width: 100px;
+  height: 52px;
+  padding: 0;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--button);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.search__button:hover {
+  opacity: 0.8;
+}
+
+.search__button_disabled {
+  opacity: 0.8;
+  color: #c2c2c2;
+  background-color: #f8f8f8;
+}
+
+.search__button_disabled:hover {
+  cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+  .search__button {
+    margin: 6px 6px 6px 0;
+    width: 80px;
+    height: 44px;
+  }
+}

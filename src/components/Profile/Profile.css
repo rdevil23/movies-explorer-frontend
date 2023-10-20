@@ -2,7 +2,7 @@
   min-height: calc(100vh - 74px);
 }
 
-.profile-block {
+.profile__block {
   max-width: 410px;
   width: 100%;
   height: 100%;
@@ -183,7 +183,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .profile-block {
+  .profile__block {
     max-width: 260px;
   }
 

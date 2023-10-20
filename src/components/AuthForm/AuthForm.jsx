@@ -4,7 +4,7 @@ import './AuthForm.css';
 import logo from '../../images/logo.svg';
 import AuthButton from '../AuthButton/AuthButton';
 
-const AuthForm = ({ title, buttonText, children, isValid }) => {
+const AuthForm = ({ title, buttonText, children, isValid, onSubmit }) => {
   return (
     <>
       <main className="auth">
@@ -15,7 +15,7 @@ const AuthForm = ({ title, buttonText, children, isValid }) => {
             </Link>
           </div>
           <h1 className="auth__header">{title}</h1>
-          <form className="auth__form">
+          <form noValidate className="auth__form" onSubmit={onSubmit}>
             <div className="auth__inputs-block">{children}</div>
             <AuthButton buttonText={buttonText} isValid={isValid} />
           </form>

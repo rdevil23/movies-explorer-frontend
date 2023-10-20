@@ -1,27 +1,57 @@
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Input from '../Input/Input';
 import AuthForm from '../AuthForm/AuthForm';
 
-const Register = () => {
+const Register = ({ onRegister }) => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [submittedData, setSubmittedData] = useState({});
+
   const {
     register,
+    handleSubmit,
+    reset,
+    formState,
     formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
+    defaultValues: { username, email, password },
   });
 
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset({ username: '', email: '', password: '' });
+    }
+  }, [formState, submittedData, reset]);
+
+  function onSubmit() {
+    setSubmittedData({ username, email, password });
+    onRegister({ email, password, username });
+  }
+
   return (
-    <AuthForm title="Добро пожаловать!" buttonText="Зарегистрироваться" isValid={isValid}>
+    <AuthForm
+      title="Добро пожаловать!"
+      buttonText="Зарегистрироваться"
+      isValid={isValid}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Input
-        className={`auth__input ${errors.name && 'auth__input_invalid'}`}
+        className={`auth__input ${errors.username ? 'auth__input_invalid' : ''}`}
+        value={username}
         type="text"
         name="username"
         inputName="Имя"
         autoComplete="off"
         placeholder="Введите имя"
         register={{
-          ...register('name', {
+          ...register('username', {
+            onChange: (e) => {
+              setUsername(e.target.value);
+            },
             required: 'Поле должно быть заполнено',
             pattern: {
               value: /^[A-Za-zА-Яа-яЁё /s -]/,
@@ -37,10 +67,11 @@ const Register = () => {
             },
           }),
         }}
-        error={errors.name}
+        error={errors.username}
       />
       <Input
-        className={`auth__input ${errors.email && 'auth__input_invalid'}`}
+        className={`auth__input ${errors.email ? 'auth__input_invalid' : ''}`}
+        value={email}
         type="email"
         name="email"
         inputName="E-mail"
@@ -48,6 +79,9 @@ const Register = () => {
         placeholder="Введите Email"
         register={{
           ...register('email', {
+            onChange: (e) => {
+              setEmail(e.target.value);
+            },
             required: 'Поле должно быть заполнено',
             pattern: {
               value:
@@ -59,7 +93,8 @@ const Register = () => {
         error={errors.email}
       />
       <Input
-        className={`auth__input ${errors.password && 'auth__input_invalid'}`}
+        className={`auth__input ${errors.password ? 'auth__input_invalid' : ''}`}
+        value={password}
         type="password"
         name="password"
         inputName="Пароль"
@@ -67,6 +102,9 @@ const Register = () => {
         placeholder="Введите пароль"
         register={{
           ...register('password', {
+            onChange: (e) => {
+              setPassword(e.target.value);
+            },
             required: 'Поле должно быть заполнено',
             minLength: {
               value: 8,

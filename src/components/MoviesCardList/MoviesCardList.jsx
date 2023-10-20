@@ -1,45 +1,92 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
+import Preloader from '../Preloader/Preloader';
 
-const MoviesCardList = ({ movies }) => {
-  const defaultMoviesToShow = 12;
+import {
+  DESKTOP_DISPLAY,
+  TABLET_DISPLAY,
+  DESKTOP_CARDS,
+  TABLET_CARDS,
+  MOBILE_CARDS,
+  DESKTOP_MORE,
+  TABLET_MORE,
+  MOBILE_MORE,
+} from '../../utils/cardsConstants';
+
+const MoviesCardList = ({
+  isPreloaderActive,
+  movies,
+  savedMovies,
+  onSaveMovie,
+  onRemoveMovie,
+  requestError,
+  welcome,
+}) => {
+  const location = useLocation();
+
+  const defaultMoviesToShow = () => {
+    if (window.innerWidth > DESKTOP_DISPLAY) {
+      return DESKTOP_CARDS;
+    } else if (TABLET_DISPLAY <= window.innerWidth && window.innerWidth <= DESKTOP_DISPLAY) {
+      return TABLET_CARDS;
+    } else {
+      return MOBILE_CARDS;
+    }
+  };
   const [showMore, setShowMore] = useState(defaultMoviesToShow);
+  const currentMovies = movies.slice(0, showMore);
 
   const handleShowMore = () => {
-    if (window.innerWidth > 1279) {
-      setShowMore(showMore + 3);
-    } else if (768 <= window.innerWidth && window.innerWidth <= 1279) {
-      setShowMore(showMore + 2);
+    setShowMore(defaultMoviesToShow);
+    if (window.innerWidth > DESKTOP_DISPLAY) {
+      setShowMore(showMore + DESKTOP_MORE);
+    } else if (TABLET_DISPLAY <= window.innerWidth && window.innerWidth <= DESKTOP_DISPLAY) {
+      setShowMore(showMore + TABLET_MORE);
     } else {
-      setShowMore(showMore + 1);
+      setShowMore(showMore + MOBILE_MORE);
     }
   };
 
-  const handleShowDefault = () => {
-    setShowMore(defaultMoviesToShow);
-  };
-
-  return (
+  return isPreloaderActive ? (
+    <Preloader />
+  ) : (
     <section className="card-list">
-      <ul className="card-list-block">
-        {movies.slice(0, showMore).map((movie) => (
-          <MoviesCard key={movie.id} movie={movie} />
-        ))}
+      <ul className="card-list__block">
+        {location.pathname === '/movies' && currentMovies.length !== 0 ? (
+          currentMovies.map((movie) => {
+            return (
+              <MoviesCard
+                key={movie.id}
+                movie={movie}
+                savedMovies={savedMovies}
+                onSaveMovie={onSaveMovie}
+              />
+            );
+          })
+        ) : movies.length !== 0 ? (
+          movies.map((movie) => {
+            return <MoviesCard key={movie._id} movie={movie} onRemoveMovie={onRemoveMovie} />;
+          })
+        ) : requestError ? (
+          <span className="card-list__error">
+            Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер
+            недоступен. Подождите немного и попробуйте ещё раз
+          </span>
+        ) : welcome ? (
+          <span className="card-list__error">Выполните поиск</span>
+        ) : (
+          <span className="card-list__error">Ничего не найдено</span>
+        )}
       </ul>
-      {showMore >= movies.length ? (
+      {location.pathname === '/movies' && (
         <button
-          onClick={handleShowDefault}
+          onClick={handleShowMore}
           type="button"
-          className={`card-list__button ${
-            movies.length <= defaultMoviesToShow && 'card-list__button_hidden'
-          }`}
+          className={`card-list__button ${showMore >= movies.length && 'card-list__button_hidden'}`}
         >
-          Свернуть
-        </button>
-      ) : (
-        <button onClick={handleShowMore} type="button" className="card-list__button">
           Еще
         </button>
       )}
