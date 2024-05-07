@@ -1,2 +1,3 @@
-export const mainUrl = 'https://api.movies.rdevil23.nomoredomainsicu.ru';
+// export const mainUrl = 'http://localhost:3000';
+export const mainUrl = 'https://movies-explorer-api-pi.vercel.app';
 export const moviesUrl = 'https://api.nomoreparties.co/beatfilm-movies';
