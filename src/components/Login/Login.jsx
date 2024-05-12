@@ -44,7 +44,7 @@ const Login = ({ onLogin }) => {
         name="email"
         inputName="E-mail"
         autoComplete="email"
-        placeholder="Введите Email"
+        placeholder="Введите Email (Протестировать: test@mail.ru)"
         register={{
           ...register('email', {
             onChange: (e) => {
@@ -67,7 +67,7 @@ const Login = ({ onLogin }) => {
         name="password"
         inputName="Пароль"
         autoComplete="on"
-        placeholder="Введите пароль"
+        placeholder="Введите пароль (Протестировать: test1234)"
         register={{
           ...register('password', {
             onChange: (e) => {
