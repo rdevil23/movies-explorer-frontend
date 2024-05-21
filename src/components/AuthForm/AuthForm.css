@@ -5,9 +5,9 @@
 .auth__block {
   max-width: 396px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
-  padding-top: calc(50vh - 253px);
+  justify-content: space-evenly;
   margin: 0 auto;
   flex-direction: column;
 }
@@ -20,6 +20,7 @@
   display: block;
   width: 38px;
   height: 38px;
+  padding-top: 20px;
 }
 
 .auth__logo:hover {
@@ -28,7 +29,6 @@
 
 .auth__header {
   width: 100%;
-  margin: 40px 0;
   color: #fff;
   font-size: 24px;
   font-style: normal;
@@ -42,25 +42,23 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-height: 420px;
 }
 
 .auth__inputs-block {
   width: 396px;
-  margin-bottom: 134px;
 }
 
 @media screen and (max-width: 1279px) {
   .auth__title {
     display: flex;
-    margin: 60px 0 50px;
     padding: 0;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 430px) {
   .auth__block {
-    max-width: 260px;
-    margin: 56px auto 30px;
+    max-width: 290px;
   }
 
   .auth__inputs-block {
@@ -75,6 +73,11 @@
   .auth__header {
     display: flex;
     justify-content: center;
-    margin: 50px 0 80px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .auth__block {
+    max-width: 260px;
   }
 }

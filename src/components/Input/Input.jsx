@@ -13,10 +13,11 @@ const Input = ({
 }) => {
   return (
     <>
-      <div className={`auth__input-block ${error ? 'auth__input-block_invalid' : ''}`}>
+      <div className="auth__input-block">
         <p className="auth__input-name">{inputName}</p>
         <input
           className={className}
+          style={error ? { border: '1px solid var(--saved)' } : {}}
           type={type}
           name={name}
           autoComplete={autoComplete}
@@ -24,7 +25,6 @@ const Input = ({
           onChange={onChange}
           {...register}
         />
-        <div className="auth__input-border"></div>
       </div>
       <div className="auth__error-block">
         {error && <div className="auth__error">{error.message}</div>}

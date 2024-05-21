@@ -99,9 +99,10 @@
   cursor: pointer;
   visibility: hidden;
   opacity: 0;
-  transition: all 0.8s;
   position: fixed;
   margin: 0;
+  width: 36px;
+  height: 36px;
   top: 22px;
   right: -400%;
 }
@@ -117,6 +118,7 @@
   .sidebar-close-btn_active {
     visibility: visible;
     opacity: 1;
+    transition: all 0.8s;
     top: 22px;
     right: 22px;
   }
@@ -221,8 +223,8 @@
   }
 
   .sidebar-close-btn {
-    top: 14px;
-    right: 14px;
+    top: 20px;
+    right: 18px;
   }
 
   .sidebar {
