@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import Preloader from '../Preloader/Preloader';
+
+import { SEARCH_NOTICE, MOVIES_NOT_FOUND } from '../../utils/messageConstants';
 
 import {
   DESKTOP_DISPLAY,
@@ -54,7 +57,9 @@ const MoviesCardList = ({
     <Preloader />
   ) : (
     <section className="card-list">
-      <ul className="card-list__block">
+      <ul
+        className={movies.length === 0 && welcome ? 'card-list__block_message' : 'card-list__block'}
+      >
         {location.pathname === '/movies' && currentMovies.length !== 0 ? (
           currentMovies.map((movie) => {
             return (
@@ -76,9 +81,9 @@ const MoviesCardList = ({
             недоступен. Подождите немного и попробуйте ещё раз
           </span>
         ) : welcome ? (
-          <span className="card-list__error">Выполните поиск</span>
+          <span className="card-list__error">{SEARCH_NOTICE}</span>
         ) : (
-          <span className="card-list__error">Ничего не найдено</span>
+          toast(MOVIES_NOT_FOUND)
         )}
       </ul>
       {location.pathname === '/movies' && (

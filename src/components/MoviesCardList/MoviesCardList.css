@@ -1,5 +1,5 @@
 .card-list {
-  padding: 80px 0 79px 0;
+  padding: 80px 0;
 }
 
 .card-list__block {
@@ -12,8 +12,25 @@
   padding-bottom: 60px;
 }
 
+.card-list__block_message {
+  box-sizing: border-box;
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  max-width: 520px;
+  width: 100%;
+  padding: 20px;
+}
+
 .card-list__error {
-  color: var(--saved);
+  color: #e8e8e8;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: center;
+  font-size: 16px;
 }
 
 .card-list__button {
@@ -58,5 +75,14 @@
   .card-list__block {
     grid-template-columns: repeat(1, 1fr);
     gap: 16px;
+  }
+  .card-list__error {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .card-list__block_message {
+    max-width: 290px;
   }
 }

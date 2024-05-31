@@ -21,3 +21,8 @@ export {
   UPDATE_PROFILE_SUCCESS,
   UPDATE_PROFILE_ERROR,
 };
+
+export const SEARCH_NOTICE =
+  'Выполните поиск.\nДля этого введите слово или букву в строку поиска и нажмите Enter или кнопку "Поиск" в правом верхнем углу.\nДля поиска короткометражных фильмов включите параметр "Короткометражки" под строкой поиска.';
+export const SEARCH_SUCCESS = 'Поиск успешно выполнен.';
+export const MOVIES_NOT_FOUND = 'Ничего не найдено';
